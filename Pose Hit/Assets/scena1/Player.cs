@@ -13,12 +13,14 @@ public class Player : MonoBehaviour
     public int _currentActivePortal = 0;
     private float _distance;
     private bool _startGame = false;
+    public ChangeFigures _changeFigures;
 
-    
+
 
     private void Start()
     {
-       // SwipeManager.instance.enabled = false;
+        _changeFigures = FindObjectOfType<ChangeFigures>();
+        // SwipeManager.instance.enabled = false;
         _currentSpeed = 0;
         _rb = GetComponent<Rigidbody>();
         _portals[_currentActivePortal].SetActive(true);
@@ -40,12 +42,15 @@ public class Player : MonoBehaviour
     {
 
         if(other.tag == "CollideCube")
-        {
-           
-           _currentActivePortal++;
-            
+        {          
+           _currentActivePortal++;           
            _portals[_currentActivePortal].SetActive(true);
 
+            if(_currentActivePortal == 3 || _currentActivePortal == 7)
+            {
+                _currentSpeed = 1;
+                _changeFigures.Replace();
+            }
 
         }
 

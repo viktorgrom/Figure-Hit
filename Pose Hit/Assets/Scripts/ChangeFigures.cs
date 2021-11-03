@@ -4,25 +4,46 @@ using UnityEngine;
 
 public class ChangeFigures : MonoBehaviour
 {
-    /*public GameObject _figure1;
-    public GameObject _figure2;
-    private bool used = false;
+    [SerializeField] private GameObject[] figures;
+    [SerializeField] private GameObject _tornado;
+    private int _currentActiveFigure = 0;
 
-    
+    private void Start()
+    {
+        figures[_currentActiveFigure].SetActive(true);
+        _tornado.SetActive(false);
+    }
 
     private void Update()
     {
-        if(!used && Input.GetKey(KeyCode.A))
-        {
-            //Replace();
-            used = true;
-        }
+        
     }
 
-    private void Replace(GameObject obj1, GameObject obj2)
+    public void Replace()
     {
-        Instantiate(obj2, obj2.transform.position, Quaternion.identity);
 
-    }*/
+        StartCoroutine(ReplaceCarutine());
+
+    }
+
+    private IEnumerator ReplaceCarutine()
+    {
+        float countDown = 3f;
+
+        figures[_currentActiveFigure].SetActive(false);
+        _currentActiveFigure++;
+
+        for (int i = 0; i < 3000; i++)
+        {
+            while (countDown >= 0)
+            {
+                _tornado.SetActive(true);
+                countDown -= Time.smoothDeltaTime;
+                yield return null;
+            }
+            figures[_currentActiveFigure].SetActive(true);
+            _tornado.SetActive(false);
+        }
+    }
 
 }
