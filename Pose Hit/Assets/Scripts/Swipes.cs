@@ -11,13 +11,12 @@ public class Swipes : MonoBehaviour
     private void Update()
     {
         tap = swipeDown = swipeUp = swipeLeft = swipeRight = false;
-        #region ПК-версия
+        #region PC-версія
         if (Input.GetMouseButtonDown(0))
         {
             tap = true;
             isDraging = true;
-            startTouch = Input.mousePosition;
-            Debug.Log("pochalos");
+            startTouch = Input.mousePosition;          
         }
         else if (Input.GetMouseButtonUp(0))
         {
@@ -26,7 +25,7 @@ public class Swipes : MonoBehaviour
         }
         #endregion
 
-        #region Мобильная версия
+        #region Мобільная версія
         if (Input.touches.Length > 0)
         {
             if (Input.touches[0].phase == TouchPhase.Began)
@@ -44,7 +43,7 @@ public class Swipes : MonoBehaviour
         }
         #endregion
 
-        //Просчитать дистанцию
+        //Прорахунок дистанції
         swipeDelta = Vector2.zero;
         if (isDraging)
         {
@@ -54,10 +53,10 @@ public class Swipes : MonoBehaviour
                 swipeDelta = (Vector2)Input.mousePosition - startTouch;
         }
 
-        //Проверка на пройденность расстояния
+        //Перевірка пройденої дистанції
         if (swipeDelta.magnitude > 100)
         {
-            //Определение направления
+            //Визначення направления
             float x = swipeDelta.x;
             float y = swipeDelta.y;
             if (Mathf.Abs(x) > Mathf.Abs(y))

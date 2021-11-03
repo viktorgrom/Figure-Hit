@@ -7,13 +7,13 @@ public class PlayerCubeCollide : MonoBehaviour
     private Rigidbody _rb;
     private float _force = 500f;
 
-    public Player _player;
+    public Player player;
     
 
     private void Start()
     {
 
-        _player = FindObjectOfType<Player>();
+        player = FindObjectOfType<Player>();
         _rb = GetComponent<Rigidbody>();
         _rb.isKinematic = true;
         _rb.useGravity = false;
@@ -28,7 +28,7 @@ public class PlayerCubeCollide : MonoBehaviour
             _rb.useGravity = true;
             _rb.AddForce(Vector3.forward * _force);
            
-            _player.CollidePlayer();
+            player.CollidePlayer();
             print(other.name);
         }
     }

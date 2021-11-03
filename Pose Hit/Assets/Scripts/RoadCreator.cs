@@ -5,27 +5,24 @@ using UnityEngine;
 public class RoadCreator : MonoBehaviour
 {
     public GameObject[] tilePrefabs;
-    private List<GameObject> activeTiles = new List<GameObject>();
-    private float spawnPos = 0;
-    private float tileLength = 30;
+    private List<GameObject> _activeTiles = new List<GameObject>();
+    private float _spawnPos = 0;
+    private float _tileLength = 30;
 
+    [SerializeField] private Transform _player;
+    private int _startTiles = 6;
 
-    [SerializeField] private Transform player;
-    private int startTiles = 6;
-
-    // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < startTiles; i++)
+        for (int i = 0; i < _startTiles; i++)
         {
             SpawnTile(Random.Range(0, tilePrefabs.Length));
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (player.position.z - 60 > spawnPos - (startTiles * tileLength))
+        if (_player.position.z - 60 > _spawnPos - (_startTiles * _tileLength))
         {
             SpawnTile(Random.Range(0, tilePrefabs.Length));
             DeleteTile();
@@ -34,13 +31,13 @@ public class RoadCreator : MonoBehaviour
 
     private void SpawnTile(int tileIndex)
     {
-        GameObject nextTile = Instantiate(tilePrefabs[tileIndex], transform.forward * spawnPos, transform.rotation);
-        activeTiles.Add(nextTile);
-        spawnPos += tileLength;
+        GameObject nextTile = Instantiate(tilePrefabs[tileIndex], transform.forward * _spawnPos, transform.rotation);
+        _activeTiles.Add(nextTile);
+        _spawnPos += _tileLength;
     }
     private void DeleteTile()
     {
-        Destroy(activeTiles[0]);
-        activeTiles.RemoveAt(0);
+        Destroy(_activeTiles[0]);
+        _activeTiles.RemoveAt(0);
     }
 }

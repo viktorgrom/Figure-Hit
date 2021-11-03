@@ -3,14 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Rotator : MonoBehaviour
-{
-    float targetAngle = 90;
-    float turnSpeed = 5;
-    private Vector3 currentVec;
+{   
     private bool _carutineOn = false;
-    
-
-    // Update is called once per frame
+     
     void Update()
     {
         if (Swipes.swipeLeft  && !_carutineOn)
@@ -22,7 +17,6 @@ public class Rotator : MonoBehaviour
         {
             StartCoroutine(Rotate(Vector3.up, 90, 1.0f));
         }
-
 
     }
 
